@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ferasinka.petshop.model.Wishlist">
+	<resultMap id="wishlistResult" type="wishlist">
+		<id property="id" column="id"/>
+		<result property="description" column="description"/>
+		<result property="date" column="date"/>
+		<result property="isDone" column="is_done"/>
+	</resultMap>
+
+	<select id="findAllWishlist" resultType="wishlist" resultMap="wishlistResult">
+		SELECT * FROM wishlist
+	</select>
+
+	<insert id="insertWishlist" parameterType="wishlist" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO wishlist(description, date, is_done) VALUES (#{description}, #{date}, #{isDone})
+	</insert>
+
+	<update id="updateWishlist" parameterType="wishlist">
+		UPDATE wishlist SET description = #{description}, date = #{date}, is_done = #{isDone} WHERE id = #{id}
+	</update>
+
+	<delete id="deleteWishlist" parameterType="int">
+		DELETE FROM wishlist WHERE id = #{id}
+	</delete>
+</mapper>
